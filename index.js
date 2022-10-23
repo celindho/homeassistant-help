@@ -31,8 +31,8 @@ try {
 }
 
 function parseIkea5(automations) {
-    return automations.map((automation) => {
-        return {
+    var button_configs = automations.map((automation) => {
+        var button_config = {
             name: automation.alias,
             middle: parseIkea5Input(automation.use_blueprint.input, 1),
             up: parseIkea5Input(automation.use_blueprint.input, 2),
@@ -40,7 +40,9 @@ function parseIkea5(automations) {
             left: parseIkea5Input(automation.use_blueprint.input, 4),
             right: parseIkea5Input(automation.use_blueprint.input, 5),
         };
+        return button_config;
     });
+    return button_configs;
 }
 
 function parseIkea5Input(autInput, buttonCode) {
@@ -70,15 +72,17 @@ function parseIkea5Input(autInput, buttonCode) {
 }
 
 function parseHueDimmer(automations) {
-    return automations.map((automation) => {
-        return {
+    var button_configs = automations.map((automation) => {
+        var button_config = {
             name: automation.alias,
             on: parseHueDimmerInput(automation.use_blueprint.input, 1),
             bright: parseHueDimmerInput(automation.use_blueprint.input, 2),
             dim: parseHueDimmerInput(automation.use_blueprint.input, 3),
             off: parseHueDimmerInput(automation.use_blueprint.input, 4),
         };
+        return button_config;
     });
+    return button_configs;
 }
 
 function parseHueDimmerInput(autInput, buttonCode) {
