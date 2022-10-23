@@ -1,0 +1,37 @@
+type: custom:html-template-card
+ignore_line_breaks: true
+content: >
+    {% set huedimmers = [{"name":"Vindfångets Philips Hue
+    Dimmer","on":{"scene_when_short":"scene.ingang_ljust","scene_when_long":"script.activate_home"},"bright":{},"dim":{},"off":{"scene_when_short":"scene.ingang_morkt","scene_when_long":"script.activate_away"}}] 
+    %}
+
+    {% for render in huedimmers %} <center> <h1>{{render.name}}</h1> <table
+    style="text-align: center; border-collapse: collapse;"> <tbody>  <tr>  <td
+    style="width: 275px; height: 110px; border: 1px solid; padding: 2px;">
+      {% if render.on.scene_when_long is defined %}<b><u>Long: {{ state_attr(render.on.scene_when_long, 'friendly_name') }}</u></b><br>{% endif %}
+      {% for light in render.on.light -%}<i>{{ state_attr(light, 'friendly_name') }}{%- if not loop.last -%}{{', '}}{%- endif-%}</i>{%- endfor %}
+      {% if render.on.scene_when_short is defined %}<b>{{ state_attr(render.on.scene_when_short, 'friendly_name') }}</b>{% endif %}
+      {% if render.on.scene_when_off is defined %}<br><b>Turn on: {{ state_attr(render.on.scene_when_off, 'friendly_name') }}</b>{% endif %}
+      {% if render.on.scene_when_on is defined %}<br><strike>Turn off: {{ state_attr(render.up.scene_when_on, 'friendly_name') }}</strike>{% endif %}
+    </td>  </tr>  <tr>  <td style="height: 110px; border: 1px solid; padding:
+    2px;">
+      {% if render.bright.scene_when_long is defined %}<b><u>Long: {{ state_attr(render.bright.scene_when_long, 'friendly_name') }}</u></b><br>{% endif %}
+      {% for light in render.bright.light -%}<i>{{ state_attr(light, 'friendly_name') }}{%- if not loop.last -%}{{', '}}{%- endif-%}</i>{%- endfor %}
+      {% if render.bright.scene_when_short is defined %}<b>{{ state_attr(render.bright.scene_when_short, 'friendly_name') }}</b>{% endif %}
+      {% if render.bright.scene_when_off is defined %}<br><b>Turn on: {{ state_attr(render.bright.scene_when_off, 'friendly_name') }}</b>{% endif %}
+      {% if render.bright.scene_when_on is defined %}<br><strike>Turn off: {{ state_attr(render.bright.scene_when_on, 'friendly_name') }}</strike>{% endif %}
+    </td>  </tr>  <tr>   <td style="height: 110px; border: 1px solid; padding:
+    2px;">
+      {% if render.dim.scene_when_long is defined %}<b><u>Long: {{ state_attr(render.dim.scene_when_long, 'friendly_name') }}</u></b><br>{% endif %}
+      {% for light in render.dim.light -%}<i>{{ state_attr(light, 'friendly_name') }}{%- if not loop.last -%}{{', '}}{%- endif-%}</i>{%- endfor %}
+      {% if render.dim.scene_when_short is defined %}<b>{{ state_attr(render.dim.scene_when_short, 'friendly_name') }}</b>{% endif %}
+      {% if render.dim.scene_when_off is defined %}<br><b>Turn on: {{ state_attr(render.dim.scene_when_off, 'friendly_name') }}</b>{% endif %}
+      {% if render.dim.scene_when_on is defined %}<br><strike>Turn off: {{ state_attr(render.dim.scene_when_on, 'friendly_name') }}</strike>{% endif %}
+    </td>  </tr>  <tr>   <td style="height: 110px; border: 1px solid; padding:
+    2px;">
+      {% if render.off.scene_when_long is defined %}<b><u>Long: {{ state_attr(render.off.scene_when_long, 'friendly_name') }}</u></b><br>{% endif %}
+      {% for light in render.off.light -%}<i>{{ state_attr(light, 'friendly_name') }}{%- if not loop.last -%}{{', '}}{%- endif-%}</i>{%- endfor %}
+      {% if render.off.scene_when_short is defined %}<b>{{ state_attr(render.off.scene_when_short, 'friendly_name') }}</b>{% endif %}
+      {% if render.off.scene_when_off is defined %}<br><b>Turn on: {{ state_attr(render.off.scene_when_off, 'friendly_name') }}</b>{% endif %}
+      {% if render.off.scene_when_on is defined %}<br><strike>Turn off: {{ state_attr(render.off.scene_when_on, 'friendly_name') }}</strike>{% endif %}
+    </td>  </tr>  </tbody> </table> </center> {% endfor %}

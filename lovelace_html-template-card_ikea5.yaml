@@ -1,0 +1,60 @@
+type: custom:html-template-card
+ignore_line_breaks: true
+content: >
+    {% set ikea5 = [{"name":"Viktors rum Ikea5","middle":{"light":["light.viktors_sang","light.viktors_tak"],"scene_when_off":"scene.viktors_rum_normal"},"up":{"scene_when_short":"scene.viktors_rum_stark"},"down":{},"left":{},"right":{"light":["light.viktors_sang"]}}]
+    %}
+
+    {% for render in ikea5 %}
+    <center>
+    <h1>{{render.name}}</h1>
+    <table style="text-align: center; border-collapse: collapse;">
+    <tbody> 
+    <tr> 
+    <td></td>
+    <td style="height: 110px; border: 1px solid; padding: 2px;">
+      {% if render.up.scene_when_long is defined %}<b><u>Long: {{ state_attr(render.up.scene_when_long, 'friendly_name') }}</u></b><br>{% endif %}
+      {% for light in render.up.light -%}<i>{{ state_attr(light, 'friendly_name') }}{%- if not loop.last -%}{{', '}}{%- endif-%}</i>{%- endfor %}
+      {% if render.up.scene_when_short is defined %}<b>{{ state_attr(render.up.scene_when_short, 'friendly_name') }}</b>{% endif %}
+      {% if render.up.scene_when_off is defined %}<br><b>Turn on: {{ state_attr(render.up.scene_when_off, 'friendly_name') }}</b>{% endif %}
+      {% if render.up.scene_when_on is defined %}<br><strike>Turn off: {{ state_attr(render.up.scene_when_on, 'friendly_name') }}</strike>{% endif %}
+    </td> 
+    <td></td>
+    </tr> 
+    <tr>
+    <td style="width: 275px; border: 1px solid; padding: 2px;">
+      {% if render.left.scene_when_long is defined %}<b><u>Long: {{ state_attr(render.left.scene_when_long, 'friendly_name') }}</u></b><br>{% endif %}
+      {% for light in render.left.light -%}<i>{{ state_attr(light, 'friendly_name') }}{%- if not loop.last -%}{{', '}}{%- endif-%}</i>{%- endfor %}
+      {% if render.left.scene_when_short is defined %}<b>{{ state_attr(render.left.scene_when_short, 'friendly_name') }}</b>{% endif %}
+      {% if render.left.scene_when_off is defined %}<br><b>Turn on: {{ state_attr(render.left.scene_when_off, 'friendly_name') }}</b>{% endif %}
+      {% if render.left.scene_when_on is defined %}<br><strike>Turn off: {{ state_attr(render.left.scene_when_on, 'friendly_name') }}</strike>{% endif %}
+    </td> 
+    <td style="width: 275px; height: 110px; border: 1px solid; padding: 2px;">
+      {% if render.middle.scene_when_long is defined %}<b><u>Long: {{ state_attr(render.middle.scene_when_long, 'friendly_name') }}</u></b><br>{% endif %}
+      {% for light in render.middle.light -%}<i>{{ state_attr(light, 'friendly_name') }}{%- if not loop.last -%}{{', '}}{%- endif-%}</i>{%- endfor %}
+      {% if render.middle.scene_when_short is defined %}<b>{{ state_attr(render.middle.scene_when_short, 'friendly_name') }}</b>{% endif %}
+      {% if render.middle.scene_when_off is defined %}<br><b>Turn on: {{ state_attr(render.middle.scene_when_off, 'friendly_name') }}</b>{% endif %}
+      {% if render.middle.scene_when_on is defined %}<br><strike>Turn off: {{ state_attr(render.middle.scene_when_on, 'friendly_name') }}</strike>{% endif %}
+    </td> 
+    <td style="width: 275px; border: 1px solid; padding: 2px;">
+      {% if render.right.scene_when_long is defined %}<b><u>Long: {{ state_attr(render.right.scene_when_long, 'friendly_name') }}</u></b><br>{% endif %}
+      {% for light in render.right.light -%}<i>{{ state_attr(light, 'friendly_name') }}{%- if not loop.last -%}{{', '}}{%- endif-%}</i>{%- endfor %}
+      {% if render.right.scene_when_short is defined %}<b>{{ state_attr(render.right.scene_when_short, 'friendly_name') }}</b>{% endif %}
+      {% if render.right.scene_when_off is defined %}<br><b>Turn on: {{ state_attr(render.right.scene_when_off, 'friendly_name') }}</b>{% endif %}
+      {% if render.right.scene_when_on is defined %}<br><strike>Turn off: {{ state_attr(render.right.scene_when_on, 'friendly_name') }}</strike>{% endif %}
+    </td>
+    </tr> 
+    <tr>
+    <td></td>
+    <td style="height: 110px; border: 1px solid; padding: 2px;">
+      {% if render.down.scene_when_long is defined %}<b><u>Long: {{ state_attr(render.down.scene_when_long, 'friendly_name') }}</u></b><br>{% endif %}
+      {% for light in render.down.light -%}<i>{{ state_attr(light, 'friendly_name') }}{%- if not loop.last -%}{{', '}}{%- endif-%}</i>{%- endfor %}
+      {% if render.down.scene_when_short is defined %}<b>{{ state_attr(render.down.scene_when_short, 'friendly_name') }}</b>{% endif %}
+      {% if render.down.scene_when_off is defined %}<br><b>Turn on: {{ state_attr(render.down.scene_when_off, 'friendly_name') }}</b>{% endif %}
+      {% if render.down.scene_when_on is defined %}<br><strike>Turn off: {{ state_attr(render.down.scene_when_on, 'friendly_name') }}</strike>{% endif %}
+    </td> 
+    <td></td>
+    </tr>
+    </tbody>
+    </table>
+    </center>
+    {% endfor %}
