@@ -51,24 +51,12 @@ function parseIkea5Input(autInput, buttonCode) {
     var scene_short_on = autInput[`scene_script_when_on${buttonCode}002`];
     var scene_long = autInput[`scene_script_${buttonCode}001`];
 
-    var input = {};
-    if (light) {
-        if (Array.isArray(light.entity_id)) {
-            input.light = light.entity_id;
-        } else {
-            input.light = [];
-            input.light[0] = light.entity_id;
-        }
-    }
-    if (scene_short_off)
-        if (input.light) input.scene_when_off = scene_short_off;
-        else input.scene_when_short = scene_short_off;
-    if (scene_short_on)
-        if (input.light) input.scene_when_on = scene_short_on;
-        else input.scene_not_available = scene_short_on;
-    if (scene_long) input.scene_when_long = scene_long;
-
-    return input;
+    return createbuttonObject(
+        light,
+        scene_short_off,
+        scene_short_on,
+        scene_long
+    );
 }
 
 function parseHueDimmer(automations) {
@@ -91,8 +79,34 @@ function parseHueDimmerInput(autInput, buttonCode) {
     var scene_short_on = autInput[`scene_script_when_on${buttonCode}000`];
     var scene_long = autInput[`scene_script_${buttonCode}001`];
 
+    return createbuttonObject(
+        light,
+        scene_short_off,
+        scene_short_on,
+        scene_long
+    );
+}
+
+function createbuttonObject(
+    light,
+    scene_short_off,
+    scene_short_on,
+    scene_long
+) {
     var input = {};
-    if (light) input.light = light;
+    if (light) {
+        input.light = { entity_id: [], device_id: [] };
+        if (Array.isArray(light.entity_id)) {
+            input.light.entity_id = light.entity_id;
+        } else if (light.entity_id) {
+            input.light.entity_id.push(light.entity_id);
+        }
+        if (Array.isArray(light.device_id)) {
+            input.light.device_id = light.device_id;
+        } else if (light.device_id) {
+            input.light.device_id.push(light.device_id);
+        }
+    }
     if (scene_short_off)
         if (input.light) input.scene_when_off = scene_short_off;
         else input.scene_when_short = scene_short_off;
